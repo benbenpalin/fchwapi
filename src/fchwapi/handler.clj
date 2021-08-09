@@ -4,12 +4,13 @@
     [clojure.data.json :as json]
     [compojure.core :refer :all]
     [compojure.route :as route]
-    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]))
+    [ring.middleware.defaults :refer [wrap-defaults site-defaults]]
+    [fchwapi.config :refer [api-key]]))
 
 
 (defn call-enrich []
   (:body (client/post "https://api.fullcontact.com/v3/person.enrich"
-                    {:headers {:Authorization :secret}
+                    {:headers {:Authorization api-key}
                      :content-type :json
                      :form-params  {:phone "+13035551234"}})))
 
